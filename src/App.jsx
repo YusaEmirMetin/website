@@ -1,7 +1,8 @@
 import React, { useState } from 'react'; 
 import { Layout, Menu, Typography, Divider, Avatar, Button, Space, Drawer, Collapse, Tag, Card, Tooltip } from 'antd'; 
-import { GithubOutlined, LinkedinOutlined, RocketOutlined, CodeOutlined, UserOutlined, FilePdfOutlined} from '@ant-design/icons';
+import { GithubOutlined, LinkedinOutlined, RocketOutlined, CodeOutlined, UserOutlined, FilePdfOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import profilResmi from './assets/Vesikalık.png';
+import aselsanLogosu from './assets/aselsan.png'; 
 
 const { Header, Content, Footer } = Layout;
 const { Title, Text, Paragraph } = Typography;
@@ -21,22 +22,23 @@ function App() {
     Developed a system capable of converting text into natural-sounding speech and mimicking a target speaker’s voice from short audio samples. 
     Analyzed the acoustic structure of generated speech through mel-spectrograms to identify limitations in prosody, breath cues, and emotional variation. 
     Explored these artifacts as potential features for distinguishing synthetic speech from real human voice, contributing to deepfake detection research.`,
-    etiketler: ["React", "Flask", "AI"],
+    etiketler: ["React", "Flask", "Tacotron2-DDC", "HiFi-GAN", "YourTTS"],
     renk: "purple"
-  },
+  }
+];
+
+const experience = [
   {
-    id: 2,
-    baslik: "Twitter Bot 'Who?'",
-    aciklama: "OpenAI API ile tweet analizi yapan akıllı asistan.",
-    etiketler: ["Python", "OpenAI"],
-    renk: "orange"
-  },
-  {
-    id: 3,
-    baslik: "FLTurkey Scraper",
-    aciklama: "Süper Lig verilerini çeken veri kazıma aracı.",
-    etiketler: ["Python", "BeautifulSoup"],
-    renk: "gold"
+    id: 1,
+    baslik: "ASELSAN A.Ş",
+    logo: aselsanLogosu,
+    aciklama: `During my summer internship at ASELSAN within the FPGA Design Team of the Embedded Software Department in the Electro-Optics Division, I gained hands-on experience in FPGA-based system design and development. The internship allowed me to bridge the gap between theoretical knowledge acquired at university and real-world engineering applications in the defense industry.
+    Throughout the internship, I worked primarily with VHDL and FPGA technologies using tools such as Quartus Prime Lite Edition for design and synthesis, and ModelSim for simulation and verification. One of my initial tasks was designing a 256x8 RAM module in VHDL, which helped me understand fundamental FPGA concepts such as entity-architecture structure, process blocks, and synchronous read/write operations. Building on this, I developed a hierarchical RAM Controller that initialized and verified memory contents, reinforcing my understanding of modular and hierarchical design.
+    I also contributed to more advanced projects related to video processing. I designed a Video Generator capable of producing grayscale video output at a resolution of 640x512 with a refresh rate of 25 Hz, which required precise timing calculations using a 50 MHz clock. In addition, I worked on an Auto Focus system that analyzed image sharpness using line difference methods to automatically adjust focus. Another key project was Histogram Analysis, where I designed a system to calculate pixel intensity distributions using a 256x20 RAM structure, providing valuable insight into image brightness and contrast analysis.
+    Through these projects, I strengthened my skills in logic design, VHDL coding, simulation-based verification, and FPGA system architecture. I also enhanced my problem-solving abilities, technical documentation skills, and understanding of real-time embedded systems. Furthermore, by completing an additional FPGA design course independently, I deepened my theoretical knowledge and complemented my practical experience.
+    Overall, this internship significantly improved my technical competence in FPGA and embedded system design while providing valuable exposure to professional engineering practices, teamwork, and industry-level development standards in the defense sector.`,
+    learning: ["VHDL", "System-Verilog", "Defense Tech"], // Kendi etiketlerin
+    renk: "blue"
   }
 ];
 
@@ -99,7 +101,45 @@ function App() {
               <Card.Meta title="Artificial Intelligence" description="Deepfake tespiti ve NLP tabanlı bot projeleri." />
             </Card>
           </div>
+          <div style={{ marginTop: '50px' }}>
+            <ArrowDownOutlined 
+              className="scroll-arrow" 
+              style={{ fontSize: '50px', color: '#1890ff' }}
+            />
+          </div>
         </div>
+
+
+       {/* İLETİŞİM KISMI */}
+          <div style={{ 
+            padding: '80px 50px', 
+            background: '1890ff', 
+            textAlign: 'center' 
+          }}>
+            <Divider><Title level={2}>Contact Me</Title></Divider>
+            <Paragraph style={{ fontSize: '18px', color: '#1890ff', marginBottom: '40px' }}>
+            </Paragraph>
+            
+            <Space size="large" wrap justify="center">
+              {/* Email Butonu */}
+              <Card hoverable style={{ width: 280, borderRadius: '12px', border: '1px solid #69c0ff' }}>
+                <div style={{ fontSize: '24px', color: '#1890ff', marginBottom: '10px' }}>📧</div>
+                <Title level={4} style={{ margin: 0 }}>Email</Title>
+                <Button type="link" href="mailto:yusaemirm@email.com" style={{ fontSize: '16px' }}>
+                  yusaemirm@email.com
+                </Button>
+              </Card>
+
+              {/* Telefon Butonu */}
+              <Card hoverable style={{ width: 280, borderRadius: '12px', border: '1px solid #69c0ff' }}>
+                <div style={{ fontSize: '24px', color: '#d9d9d9', marginBottom: '10px' }}>📞</div>
+                <Title level={4} style={{ margin: 0 }}>Phone</Title>
+                <Button type="link" href="tel:+905555555555" style={{ fontSize: '16px' }}>
+                  +90 555 555 55 55
+                </Button>
+              </Card>
+            </Space>
+          </div>
       </Content>
 
       <Footer style={{ textAlign: 'center', background: '#001529', color: 'rgba(255,255,255,0.45)', padding: '40px' }}>
@@ -166,6 +206,51 @@ function App() {
                       {proje.etiketler.map(etiket => (
                         <Tag color={proje.renk} key={etiket} style={{ borderRadius: '4px' }}>
                           {etiket}
+                        </Tag>
+                      ))}
+                    </Space>
+                  </Collapse.Panel>
+                ))}
+              </Collapse>
+
+
+
+              {/* Experience Section */}
+              <Title level={3} style={{ marginTop: '20px' }}>Experience</Title>
+              <Collapse accordion ghost expandIconPosition="end">
+                {experience.map((exp) => ( // 'exp' kullanarak karışıklığı önledik
+                  <Collapse.Panel 
+                    header={
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        {/* LOGO BURAYA EKLENDİ */}
+                        {exp.logo && (
+                          <img 
+                            src={exp.logo} 
+                            alt={`${exp.baslik} logo`} 
+                            style={{ width: '30px', height: '30px', objectFit: 'contain' }} 
+                          />
+                        )}
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <Text strong style={{ fontSize: '16px', color: '#1890ff' }}>{exp.baslik}</Text>
+                        </div>                                                 
+                      </div>
+                    } 
+                    key={`exp-${exp.id}`} // Key'ler benzersiz olmalı
+                    style={{ marginBottom: '15px', background: '#fafafa', borderRadius: '8px' }}
+                  >
+                    <Paragraph style={{ 
+                      whiteSpace: 'pre-line', 
+                      fontSize: '15px', 
+                      color: '#434343',
+                      lineHeight: '1.6'
+                    }}>
+                      {exp.aciklama}
+                    </Paragraph>
+
+                    <Space wrap style={{ marginTop: '10px' }}>
+                      {exp.learning && exp.learning.map(skill => (
+                        <Tag color={exp.renk} key={skill} style={{ borderRadius: '4px' }}>
+                          {skill}
                         </Tag>
                       ))}
                     </Space>
