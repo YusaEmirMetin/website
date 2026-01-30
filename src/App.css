@@ -655,3 +655,14 @@ a:focus-visible {
   }
 }
 
+/* Guestbook styles */
+.guestbook-section .ant-list-item {
+  border-bottom: 1px dashed rgba(0,0,0,0.06);
+  padding: 12px 0;
+}
+.guestbook-section .ant-list-item:last-child {
+  border-bottom: none;
+}
+.guestbook-section .ant-form-item {
+  margin-bottom: 12px;
+}
